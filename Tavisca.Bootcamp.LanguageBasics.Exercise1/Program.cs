@@ -20,49 +20,46 @@ namespace Tavisca.Bootcamp.LanguageBasics.Exercise1
             Console.WriteLine($"{args} : {result}");
         }
 
-        public static int FindDigit(string equation)
-        {
-            // Add your code here.
-            int idx1 = equation.IndexOf("*");
-            int idx2 = equation.IndexOf("=");
+        public int FindDigit(String equation){
+            int idx_star = equation.IndexOf("*");
+            int idx_equal = equation.IndexOf("=");
 
-            String s1 = equation.Substring(0, idx1);
-            String s2 = equation.Substring(idx1+1, idx2-idx1-1);
-            String s3 = equation.Substring(idx2+1);
+            String operand1 = equation.Substring(0, idx_star);
+            String operand2 = equation.Substring(idx_star+1, idx_equal-idx_star-1);
+            String operand3 = equation.Substring(idx_equal+1);
 
-            if(s1.IndexOf("?") != -1 || s2.IndexOf("?") != -1){
-                if(s2.IndexOf("?") != -1){
-                    String temp = s1;
-                    s1 = s2;
-                    s2 = temp;
+            if(operand1.IndexOf("?") != -1 || operand2.IndexOf("?") != -1){
+                if(operand2.IndexOf("?") != -1){
+                    String temp = operand1;
+                    operand1 = operand2;
+                    operand2 = temp;
                 }
                 
-                int val3 = int.Parse(s3);
-                int val2 = int.Parse(s2);
+                int intval3 = int.Parse(operand3);
+                int intval2 = int.Parse(operand2);
 
-                int val1 = val3 / val2;
-                String s1original = val1.ToString();
-                if(s1.Length != s1original.Length) return -1;
+                int intval1 = intval3 / intval2;
+                String operand1original = intval1.ToString();
+                if(operand1.Length != operand1original.Length) return -1;
 
-                int idx = s1.IndexOf("?");
-                char ch = s1original[idx];
+                int idx = operand1.IndexOf("?");
+                char ch = operand1original[idx];
 
                 return ch - '0' == 0 && idx == 0 ? -1 : (ch-'0');
             }
             else{
-                int val1 = int.Parse(s1);
-                int val2 = int.Parse(s2);
-                int val3 = val1 * val2;
+                int intval1 = int.Parse(operand1);
+                int intval2 = int.Parse(operand2);
+                int intval3 = intval1 * intval2;
 
-                String s3original = val3.ToString();
-                if(s3.Length != s3original.Length) return -1;
+                String operand3original = intval3.ToString();
+                if(operand3.Length != operand3original.Length) return -1;
 
-                int idx = s3.IndexOf("?");
-                char ch = s3original[idx];
+                int idx = operand3.IndexOf("?");
+                char ch = operand3original[idx];
 
                 return ch - '0' == 0 && idx == 0 ? -1 : (ch - '0');
             }
-            throw new NotImplementedException();
         }
     }
 }
